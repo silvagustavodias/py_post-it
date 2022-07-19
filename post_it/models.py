@@ -1,4 +1,4 @@
-from main import database
+from post_it import database
 from datetime import datetime
 
 
