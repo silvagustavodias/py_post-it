@@ -35,6 +35,10 @@ class FormEditarPerfil(FlaskForm):
     interesse_economia = BooleanField('Economia')
     interesse_futebol = BooleanField('Futebol')
     interesse_politica = BooleanField('Política')
+    interesse_piramide = BooleanField('Pirâmides')
+    interesse_reality = BooleanField('Reality Shows')
+    interesse_twitter = BooleanField('Threads de Twitter')
+    interesse_pantanal = BooleanField('Pantanal')
 
     def validate_email(self, email):
         if current_user.email != email.data:
@@ -46,4 +50,9 @@ class FormEditarPerfil(FlaskForm):
 class FormCriarPost(FlaskForm):
     titulo = StringField('Titulo do Post', validators=[DataRequired(), Length(2,140)])
     corpo = TextAreaField('Escreva seu post aqui', validators=[DataRequired()])
+    botao_submit_post = SubmitField('Postar')
+
+class FormRespostaPost(FlaskForm):
+
+    comentario = TextAreaField('Faça seu comentário aqui', validators=[DataRequired()])
     botao_submit_post = SubmitField('Postar')

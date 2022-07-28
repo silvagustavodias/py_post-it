@@ -27,3 +27,11 @@ class Post(database.Model):
     corpo = database.Column(database.Text, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow())
     id_usuario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)
+    resposta = database.relationship('Resposta', backref='post', lazy=True)
+
+
+class Resposta(database.Model):
+    id = database.Column(database.Integer, primary_key=True)
+    comentario = database.Column(database.Text, nullable=False)
+    data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow())
+    id_post = database.Column(database.Integer, database.ForeignKey('post.id'), nullable=False)

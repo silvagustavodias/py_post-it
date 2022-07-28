@@ -3,27 +3,42 @@
 {% block body%}
 
 <div class="container">
-
-    <h1>Post-It - repositório de notícias e comentários</h1>
-    <h3> <i>de 0 a 100 em 3s</i></h3>
+        <div class="row">
+            <div class="col col-1 mt-3">
+                <img class="img-fluid" height="100" width="100"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAADBElEQVR4nO2aT0gUURzHv29mzNq13VzNP1CQFhF46KCHzFt0ik5B5iELoqBuXmr1VkRQdKmDWQh1yJL+3bpEYoEnCTEQoT+2h1az/LvLprs6M+91SWhtR1Z3eD939n2v37fz+34/sG9mmMcgWZeM20cBXp/Z1Ya6rMt9MvMYMocBQFlt4ObugxX1oT1+CM4BAKZpYvLTLGbGFoYQQYPMPNIBAMCh1jrsP1IN21wGACwmk/jwchQDd8akZ9GkT9xkUgCoA1Cr4AGkbYIn8VyvrRrr3rLNLoMQWPrNFt0eKCy7xsljtl1zpfx6r9szi3ymXwOwnDJmI1MHzr9As73ipQEoRaRkMaGdPdYW1wAOzMXczoLBd35HL1i+FGo89b3F7Znz83MQAuh/2sBLEWkDEF/x/rsN6gZEU0sCEByITrqdBaPD+xy9kqCJpuPuzxyPRsGFwPtn9QJgaV7B7wEKAHUAahU8AOnvAhoz8frqAHx3AXALAGALhsS0hcpqS3Yc+QBOXPiI6fHPGb2du5KS0xAACFWmEKpMyR7rqILfAxwBfB3ciolvzk9tXpEjgJF+H74M75CZhUTqL7Cmy9Z0PSHHu8Dh5gSK4zMys5DIEUDVXhOILsnMQiK1B1AHoJYCQB2AWgoAdQBqKQDUAailAFAHoJYCQB2AWgoAdQBqKQDUAailAFAHoJYCQB2AWgoAdQBqKQDUAahFclo8F0VGAui+UQchsv9uZ3MOwRmWTUOzIPi/Xt4BiM0WYyHgw3RjRda/MWIWgm9+Qdd570O0J9I81xNKECsC7EBRVmv1uIlg3xQ0Zj/pXOg4vdrPSwDZSo+bCL36AWbZPfeSHa2Z1nh2E1wpr1n8cVeyPWN5wKMA0suHz6y11nMA1lMe8BiA9ZYHPARgI+UBjwDYaHnAAwByKQ/kOYBcywN5DMCN8kCeAuAx/re86MmlPJDhUdg2wd4+CALgQGzznZSciPiBnxYMHY86U+FzuV5vVUPBLhq3wkxjm/aQMGPYzm1M3bfC19y43h/u6xj6eIwhEQAAAABJRU5ErkJggg==">
+            </div>
+            <div class="col col-9">
+            <h1 class="mt-3" style="text-align-left">
+                Post-It - repositório de notícias e comentários
+            </h1>
+                <h3> <i>de 0 a 100 em 3s</i></h3>
+            </div>
+        </div>
     <hr>
     {% for post in posts %}
     <div class = "row border mt-4 p-3 meupost">
-        <div class = "col col-3">
-
-
-            <p> </p>
-
-
+        <div class = "col col-2 text-center">
+            <div class="image pe-2">
+               <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.author.foto_perfil))}}" alt="{{ url_for('static', filename='fotos_perfil/{}'.format('default.png'))}}" class="box-foto-post img-thumbnail rounded"  >
+                <br></b><strong>{{ post.author.username}}</strong><br>
+                <div class="row justify-content-center">
+                {% for interesse in post.author.interesses.split(';') %}
+                    <span class="badge bg-success mt-1">{{ interesse }}</span>
+                {% endfor %}
+                </div>
+            </div>
         </div>
         <div class = "col col-9">
-            <h4>{{post.titulo}}</h4>
-            <p>{{ post.corpo }}</p>
-
+            <a style="text-decoration:none; color:inherit" href="{{ url_for('exibir_post', post_id=post.id) }}">
+                <h4>{{post.titulo}}
+                    <small class="text-muted d-flex align-items-start" style="font-size: 15px">
+                        <p class="fst-italic">Data de criação {{post.data_criacao.strftime('%H:%M:%S %d/%m/%Y')}}</p>
+                    </small>
+                </h4>
+            </a>
+            <p class="justify-content-center">{{ post.corpo }}</p>
         </div>
     </div>
     {% endfor %}
 </div>
-
-
 {% endblock%}
