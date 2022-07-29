@@ -179,20 +179,12 @@ def editar_post(post_id):
 @app.route('/post/<post_id>', methods=['GET', 'POST'])
 def exibir_post(post_id):
     post = Post.query.get(post_id)
+    comentarios = Resposta.query.filter_by(id_post=post_id)
     if current_user == post.author:
         form = True
-        # if request.method == 'GET':
-        #     form.titulo.data = post.titulo
-        #     form.corpo.data = post.corpo
-        # elif form.validate_on_submit():
-        #     post.titulo = form.titulo.data
-        #     post.corpo = form.corpo.data
-        #     database.session.commit()
-        #     flash("Post atualizado com sucesso", "alert-success mt-2")
-        #     return redirect(url_for('home'))
     else:
         form = None
-    return render_template('post.html', post=post, form=form)
+    return render_template('post.html', comentarios=comentarios, post=post, form=form)
 
 
 @login_required

@@ -14,6 +14,8 @@ Site para compartilhar notícias e opiniões e testar a utilização de Flask no
 
 **Back-end:** Flask
 
+**referências**: corey shafer flask website (youtube.com)
+
 ------
 # Documentation
 Para fins de estudos posteriores. Documentação construída em forma de relato para construção de estudos.
@@ -42,6 +44,11 @@ __descrição__: classe para instanciar as classes mais gerais: APP, a Database,
 
 __descrição__: módulo  que vai formar as tabelas dos banco de dados a partir de classes.
 Aqui também são tratados os relacionamentos entre as classes.
+
+#### importante: Para criação da DATABASE utilizar o console python com os seguintes comandos:
+  1. from post_it import database
+  2. from post_it.models import Usuario, Post, Resposta...
+  3. database.create_all()
 
 #### imports realizados
 * database importada da classe __init__

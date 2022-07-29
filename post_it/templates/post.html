@@ -31,6 +31,20 @@
         </div>
     </div>
 </div>
+    <div class="container me-auto">
+    <div class = "row justify-content-md-end mt-4 p-3 ">
+    {% for comentario in comentarios %}
+        <div class = "col-9 mt-2 border meupost">
+        <small class="text-muted d-flex align-items-start" style="font-size: 15px">
+            <p class="fst-italic">Data de criação {{comentario.data_criacao.strftime('%H:%M:%S %d/%m/%Y')}}</p>
+        </small>
+        <p class="justify-content-center">{{ comentario.comentario }}</p>
+         </div>
+    {% endfor %}
+        </div>
+    </div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
